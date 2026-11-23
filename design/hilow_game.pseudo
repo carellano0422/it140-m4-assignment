@@ -1,27 +1,57 @@
 # IT 140 Module Four Assignment
 # Higher/Lower Game Pseudocode Template
 #
-# Complete the TODO prompts below with your own pseudocode.
-# Keep this file in .pseudo format for submission.
 #
-# Use clear indentation to show decisions and repeated behavior.
-# Your finished pseudocode should address every requirement in the
-# current Module Four Assignment Guidelines and Rubric.
-
 START hilow_game
 
-    # Establish a valid guessing range.
-    TODO: Obtain the lower and upper bounds.
-    TODO: Repeat as needed until the bounds satisfy the requirement.
+    # Establish a valid guessing range
+    PUT "Enter the lower bound:"
+    GET lower_bound
 
-    # Establish the number the player is trying to guess.
-    TODO: Generate the required random number from the valid range.
+    PUT "Enter the upper bound:"
+    GET upper_bound
 
-    # Play the game.
-    TODO: Obtain and validate a guess using the selected bounds.
-    TODO: Repeat the required game behavior until the correct guess.
-        TODO: Compare a valid guess and provide the required feedback.
-        TODO: Obtain and validate another guess when play continues.
+    WHILE lower_bound >= upper_bound
+        PUT "Invalid range. Lower bound must be less than upper bound."
+        PUT "Enter the lower bound:"
+        GET lower_bound
+        PUT "Enter the upper bound:"
+        GET upper_bound
+    ENDWHILE
+
+    # Generate the random number
+    LET secret_number = RANDOM(lower_bound, upper_bound)
+
+    # Ask the player for a guess
+    PUT "Enter a number between", lower_bound, "and", upper_bound
+    GET guess
+
+    # Validate the guess
+    WHILE guess < lower_bound OR guess > upper_bound
+        PUT "Invalid guess. Enter a number within the range."
+        GET guess
+    ENDWHILE
+
+    # Continue until the correct number is guessed
+    WHILE guess != secret_number
+
+        IF guess < secret_number THEN
+            PUT "Your guess is too low."
+        ELSE
+            PUT "Your guess is too high."
+        ENDIF
+
+        PUT "Try again:"
+        GET guess
+
+        WHILE guess < lower_bound OR guess > upper_bound
+            PUT "Invalid guess. Enter a number within the range."
+            GET guess
+        ENDWHILE
+
+    ENDWHILE
+
+    PUT "Congratulations! You guessed the correct number!"
 
 END hilow_game
 
